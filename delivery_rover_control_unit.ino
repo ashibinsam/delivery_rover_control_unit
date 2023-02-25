@@ -1,6 +1,13 @@
+#define FULL_SPEED_DIST 130
+#define TURN_DIST 80
+#define EMERGENCY_DIST 50
+#define SIDE_MIN_DIST 20
+
+
 int rFDist=0,lFDist=0,rDist=0,lDist=0;
 unsigned long t1 = 0;
 unsigned long t2 = 0;
+
 
 
 void setup() {
@@ -23,6 +30,36 @@ void loop() {
   // Serial.println(rightDis());
   // delay(50);
   ping();
+
+  while(lFDist > FULL_SPEED_DIST && rFDist > FULL_SPEED_DIST && rDist > SIDE_MIN_DIST && lDist > SIDE_MIN_DIST) {
+    // rover straight full speed
+    ping();
+  }
+  while(lFDist <= FULL_SPEED_DIST && rFDist <= FULL_SPEED_DIST && rDist > SIDE_MIN_DIST && lDist > SIDE_MIN_DIST) {
+    // rover reduced speed according to distance using an equation
+    ping();
+  }
+  while(lFDist <= TURN_DIST && rFDist <= TURN_DIST && rDist > SIDE_MIN_DIST && lDist > SIDE_MIN_DIST){
+    // Turn rover according to the distance value using an equation
+    ping();
+  }
+
+  while(lFDist <= TURN_DIST && rFDist > TURN_DIST && rDist > SIDE_MIN_DIST && lDist > SIDE_MIN_DIST){
+    // Turn rover left slightly according to the distance value using an equation
+    ping();
+  }
+
+  while(lFDist > TURN_DIST && rFDist <= TURN_DIST && rDist > SIDE_MIN_DIST && lDist > SIDE_MIN_DIST){
+    // Turn rover right slightly according to the distance value using an equation
+    ping();
+  }
+
+  while(rDist <= SIDE_MIN_DIST) {
+    //slightly turn left
+  }
+  while(lDist <= SIDE_MIN_DIST) {
+    //slightly turn right
+  }
 
 
 }
