@@ -25,9 +25,7 @@ void setup() {
   pinMode(7,INPUT);
   pinMode(8,OUTPUT);
   pinMode(9,INPUT);
-<<<<<<< Updated upstream
-  
-=======
+
   pinMode(10,OUTPUT);
   pinMode(11,INPUT);
   pinMode(12,OUTPUT);
@@ -39,7 +37,7 @@ void setup() {
     Serial.println("Ooops, no HMC5883 detected ... Check your wiring!");
     while(1);
   }
->>>>>>> Stashed changes
+
 }
 
 void loop() {
@@ -68,6 +66,7 @@ void loop() {
   // Serial.println(rightDis());
   // delay(50);
   ping();
+  sendData(ControlArr);
   
 
   while(lFDist > FULL_SPEED_DIST && rFDist > FULL_SPEED_DIST && rDist > SIDE_MIN_DIST && lDist > SIDE_MIN_DIST) {
@@ -76,6 +75,7 @@ void loop() {
     ControlArr[2]=255;
     ControlArr[3]=20;
     ping();
+    sendData(ControlArr);
   }
   while(lFDist <= FULL_SPEED_DIST || rFDist <= FULL_SPEED_DIST && rDist > SIDE_MIN_DIST && lDist > SIDE_MIN_DIST) {
     // rover reduced speed according to distance using an equation
@@ -84,46 +84,44 @@ void loop() {
     ControlArr[2]=min(lFDist,rFDist)+80;
     ControlArr[3]=20;
     ping();
-<<<<<<< Updated upstream
-    
-=======
->>>>>>> Stashed changes
-
+    sendData(ControlArr);
   }
   while(lFDist <= TURN_DIST && rFDist <= TURN_DIST && rDist > SIDE_MIN_DIST && lDist > SIDE_MIN_DIST){
     // Turn rover according to the distance value using an equation
     ping();
-    
+    sendData(ControlArr);
   }
 
   while(lFDist <= TURN_DIST && rFDist > TURN_DIST && rDist > SIDE_MIN_DIST && lDist > SIDE_MIN_DIST){
     // Turn rover left slightly according to the distance value using an equation
     ping();
-    
+    sendData(ControlArr);
   }
 
   while(lFDist > TURN_DIST && rFDist <= TURN_DIST && rDist > SIDE_MIN_DIST && lDist > SIDE_MIN_DIST){
     // Turn rover right slightly according to the distance value using an equation
     ping();
-    
+    sendData(ControlArr);
   }
 
   while(rDist <= SIDE_MIN_DIST && lFDist > TURN_DIST && rFDist > TURN_DIST) {
     ping();
     //slightly turn left
-    ping();
+    sendData(ControlArr);
     
   }
   while(lDist <= SIDE_MIN_DIST && lFDist > TURN_DIST && rFDist > TURN_DIST) {
     ping();
     //slightly turn right
-    ping();
+    sendData(ControlArr);
   }
-<<<<<<< Updated upstream
 
-=======
 ping();
 Serial.print(headingDegrees);
 Serial.println("");
->>>>>>> Stashed changes
+
+ping();
+Serial.print(headingDegrees);
+Serial.println("");
+sendData(ControlArr);
 }
