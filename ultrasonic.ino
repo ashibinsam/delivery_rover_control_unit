@@ -1,6 +1,9 @@
+const int CDArrSize = 5;
 
 int readDis(int trigPin, int echoPin)
 { 
+  //  pinMode(trigPin,OUTPUT);
+  //  pinMode(echoPin,INPUT);
   long duration; // variable for the duration of sound wave travel
   int distance; // variable for the distance measurement
 
@@ -25,9 +28,19 @@ int leftDis() {
 int rightDis() {
   return readDis(8,9);
 }
+int dLeftDis() {
+  return readDis(10,11);
+}
+int dRightDis() {
+  return readDis(12,13);
+}
 
 void ping() {
+  
+  t1 = millis();
+  
   if (abs(t2 - t1)> 20) {
+    Serial.println("hello");
     rFDist=fRightDis();
     Serial.print(rFDist);
     Serial.print("   ");
@@ -44,11 +57,32 @@ void ping() {
   }
   if (abs(t2 - t1)> 80) {
     rDist=rightDis();
-    Serial.println(rDist);
+    Serial.print(rDist);
+    Serial.print("   ");
+    
+  }
+    if (abs(t2 - t1)> 100) {
+    dLDist=dLeftDis();
+    Serial.print(dLDist);
+    Serial.print("   ");
+    
+  }
+    if (abs(t2 - t1)> 120) {
+    dRDist=dRightDis();
+    Serial.print(dRDist);
+    Serial.print("   ");
     t2=millis();
   }
   
   
   
   
+}
+
+void sendData(int controlData[]) {
+  for(int i=0; i<CDArrSize; i++) {
+    Serial.print(controlData[i]);
+    Serial.print(",");
+  }
+  Serial.println();
 }
