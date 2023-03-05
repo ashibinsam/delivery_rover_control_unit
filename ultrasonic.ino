@@ -40,41 +40,46 @@ void ping() {
   t1 = millis();
   
   if (abs(t2 - t1)> 20) {
-    Serial.println("hello");
+    //Serial.println("hello");
     rFDist=fRightDis();
-    Serial.print(rFDist);
-    Serial.print("   ");
+    // Serial.print(rFDist);
+    // Serial.print("   ");
   }
   if (abs(t2 - t1)> 40) {
     lDist=leftDis();
-    Serial.print(lDist);
-    Serial.print("   ");
+    // Serial.print(lDist);
+    // Serial.print("   ");
   }
   if (abs(t2 - t1)> 60) {
     lFDist=fLeftDis();
-    Serial.print(lFDist);
-    Serial.print("   ");
+    // Serial.print(lFDist);
+    // Serial.print("   ");
   }
   if (abs(t2 - t1)> 80) {
     rDist=rightDis();
-    Serial.print(rDist);
-    Serial.print("   ");
+    // Serial.print(rDist);
+    // Serial.print("   ");
     
   }
     if (abs(t2 - t1)> 100) {
     dLDist=dLeftDis();
-    Serial.print(dLDist);
-    Serial.print("   ");
+    // Serial.print(dLDist);
+    // Serial.print("   ");
     
   }
     if (abs(t2 - t1)> 120) {
     dRDist=dRightDis();
-    Serial.print(dRDist);
-    Serial.print("   ");
+    // Serial.print(dRDist);
+    // Serial.print("   ");
     t2=millis();
   }
   
-  
+  if(rFDist<= CLEARANCE_DIST || lFDist<= CLEARANCE_DIST || lDist<= CLEARANCE_DIST || rDist<= CLEARANCE_DIST || dLDist<= CLEARANCE_DIST || dRDist<= CLEARANCE_DIST) {
+    stopFlag =true;
+  }
+  else {
+    stopFlag = false;
+  }
   
   
 }
