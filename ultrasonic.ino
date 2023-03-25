@@ -35,43 +35,60 @@ int dRightDis() {
   return readDis(12,13);
 }
 
+void printDist() {
+    Serial.print(" | ");
+    Serial.print(rFDist);
+    Serial.print("   ");
+    Serial.print(lFDist);
+    Serial.print("   ");
+    Serial.print(rDist);
+    Serial.print("   ");
+    Serial.print(lDist);
+    Serial.print("   ");
+    Serial.print(dRDist);
+    Serial.print("   ");
+    Serial.print(dLDist);
+    Serial.print("   ");
+    Serial.print(" | ");
+}
 void ping() {
   
   t1 = millis();
   
-  if (abs(t2 - t1)> 20) {
+  if (abs(t2 - t1)> 10) {
     //Serial.println("hello");
     rFDist=fRightDis();
     // Serial.print(rFDist);
     // Serial.print("   ");
   }
-  if (abs(t2 - t1)> 40) {
+  if (abs(t2 - t1)> 20) {
     lDist=leftDis();
     // Serial.print(lDist);
     // Serial.print("   ");
   }
-  if (abs(t2 - t1)> 60) {
+  if (abs(t2 - t1)> 30) {
     lFDist=fLeftDis();
     // Serial.print(lFDist);
     // Serial.print("   ");
   }
-  if (abs(t2 - t1)> 80) {
+  if (abs(t2 - t1)> 40) {
     rDist=rightDis();
     // Serial.print(rDist);
     // Serial.print("   ");
     
   }
-    if (abs(t2 - t1)> 100) {
+    if (abs(t2 - t1)> 50) {
     dLDist=dLeftDis();
     // Serial.print(dLDist);
     // Serial.print("   ");
     
   }
-    if (abs(t2 - t1)> 120) {
+    if (abs(t2 - t1)> 60) {
     dRDist=dRightDis();
     // Serial.print(dRDist);
     // Serial.print("   ");
     t2=millis();
+    // printDist();
   }
   
   if(rFDist<= CLEARANCE_DIST || lFDist<= CLEARANCE_DIST || lDist<= CLEARANCE_DIST || rDist<= CLEARANCE_DIST || dLDist<= CLEARANCE_DIST || dRDist<= CLEARANCE_DIST) {
